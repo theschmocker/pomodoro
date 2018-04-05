@@ -29,7 +29,9 @@ function Timer() {
         countdown.innerText = currentTimer.time;
     };
 
-    this.start = () => currentTimer.start();
+    this.start = () => {
+        if (!this.isRunning()) currentTimer.start()
+    }
 
     this.stop = () => currentTimer.stop();
 
@@ -99,6 +101,12 @@ function settingsChange(e) {
     }
 }
 
+function controlHandler(e) {
+    if (e.target.nodeName === 'BUTTON') {
+        AppTimer[e.target.id]();
+    }
+}
+
 // Helper Methods
 function updateMinuteDisplay(el, action) {
     let minutes = Number(el.innerText);
@@ -117,7 +125,15 @@ function updateMinuteDisplay(el, action) {
 }
 
 function formatTime(inSeconds) {
-    return `${Math.floor(inSeconds / 60)}:${inSeconds % 60}`;
+    function twoDigit(time) {
+        if (String(time).length == 1) time = '0' + time;
+        return time;
+    }
+
+    const minutes = twoDigit(Math.floor(inSeconds / 60));
+    const seconds = twoDigit(inSeconds % 60);
+
+    return `${minutes}:${seconds}`;
 }
 
 function observable(value) {
@@ -153,7 +169,4 @@ timerSettings.forEach(el => {
     el.addEventListener('click', settingsChange);
 });
 
-timerControls.addEventListener('click', e => {
-    
-});
-
+timerControls.addEventListener('click', controlHandler);
