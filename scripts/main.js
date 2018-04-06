@@ -10,16 +10,22 @@ const breakLengthElement = document.getElementById('break-length');
 
 function Timer() {
     this.sessionDuration;
+    this.breakDuration;
     let currentTimer = new Pomodoro(this);
     this.setSessionDuration = (time) => {
         this.sessionDuration = time;
         currentTimer = new Pomodoro(this);
         this.updateDisplay();
     };
+
+    this.setBreakDuration = (time) => {
+        this.breakDuration = time;
+    };
     this.isRunning = () => currentTimer.isRunning;
 
     this.changeTimer = (nextTimer, shouldStart=true) => {
         currentTimer = nextTimer;
+        document.getElementById('timer-label').innerText = nextTimer.type;
         if (shouldStart) nextTimer.start();
         else this.updateDisplay();
     };
@@ -44,6 +50,7 @@ function Timer() {
 
 function Pomodoro(timer) {
     this.timer = timer;
+    this.type = 'Pomodoro';
     this.isRunning = false;
     //default display value
     this.time = timer.sessionDuration;
@@ -70,6 +77,40 @@ function Pomodoro(timer) {
     this.stop = () => {
         this.isRunning = false;
         clearInterval(timerLoop);
+        if (this.currentTime === 0) timer.changeTimer(new Break(timer));
+    };
+}
+
+function Break(timer) {
+    this.timer = timer;
+    this.type = 'Break';
+    this.isRunning = false;
+    //default display value
+    this.time = timer.breakDuration;
+    // used for timerLoop
+    this.currentTime = this.time * 60;
+
+    let timerLoop;
+
+    let duration;
+    
+    this.start = () => {
+        this.isRunning = true;
+        timerLoop = setInterval(() => {
+            if (this.currentTime === 0) {
+                this.stop();
+                return;
+            }
+            this.currentTime--;
+            this.time = formatTime(this.currentTime);
+            this.timer.updateDisplay();
+
+        }, 1000);
+    };
+    this.stop = () => {
+        this.isRunning = false;
+        clearInterval(timerLoop);
+        if (this.currentTime === 0) timer.changeTimer(new Pomodoro(timer));
     };
 }
 
@@ -79,24 +120,24 @@ function updateSessionLengthDisplay(minutes) {
     display.innerText = minutes;
 }
 
+function updateBreakLengthDisplay(minutes) {
+    const display = document.getElementById('break-length');
+    display.innerText = minutes;
+}
+
 
 // Event Handlers
 function settingsChange(e) {
     if (e.target.nodeName === 'BUTTON' && !AppTimer.isRunning()) {
-        //const minuteDisplay = this.querySelector('.minute-setting');
-        //updateMinuteDisplay(minuteDisplay, e.target.className);
-        if (this.id === 'session-setting') {
-            switch (e.target.className) {
-                case 'increment':
-                    sessionLength(sessionLength() + 1);
-                    break;
-                case 'decrement':
-                    sessionLength(sessionLength() - 1);
-                    break;
-                default:
-                    break;
-            }
-            
+        switch (this.id) {
+            case 'session-setting':
+                updateSetting(sessionLength, e.target.className);
+                break;
+            case 'break-setting':
+                updateSetting(breakLength, e.target.className);
+                break;
+            default:
+                break;
         }
     }
 }
@@ -155,14 +196,33 @@ function observable(value) {
     return accessor;
 }
 
+function updateSetting(observ, action) {
+    console.log(action);
+    switch (action) {
+        case 'increment':
+            observ(observ() + 1);
+            break;
+        case 'decrement':
+            observ(observ() - 1);
+            break;
+        default:
+            break;
+        
+    }
+}
+
 const sessionLength = observable();
 const breakLength = observable();
 
 sessionLength.subscribe(updateSessionLengthDisplay);
+breakLength.subscribe(updateBreakLengthDisplay);
 
 const AppTimer = new Timer();
+
 sessionLength.subscribe(AppTimer.setSessionDuration);
 sessionLength(25);
+breakLength.subscribe(AppTimer.setBreakDuration);
+breakLength(5);
 
 // add event listeners
 timerSettings.forEach(el => {
