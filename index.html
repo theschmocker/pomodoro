@@ -23,9 +23,13 @@
                 <button class="increment">Up</button>
             </div>
         </div>
-        <div class="timer">
+        <div role="timer-start-stop" class="timer">
             <span id="timer-label">Pomodoro</span>
             <h2 id="countdown"></h2>
+            <div id="timer-state">
+                <span class="play"></span>
+                <span class="pause hidden"></span>
+            </div>
         </div>
         <div class="controls">
             <button id="start">Start</button>
