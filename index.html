@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pomodoro Timer</title>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-    <!--Session controls-->
-    <div class="time-setting" id="session-setting">
-        <h4>Session Length</h4>
-        <button class="decrement">Down</button>
-        <span class="minute-setting" id="session-length"></span>
-        <button class="increment">Up</button>
-    </div>
-    <!--Break controls-->
-    <div class="time-setting" id="break-setting">
-        <h4>Break Length</h4>
-        <button class="decrement">Down</button>
-        <span class="minute-setting" id="break-length">5</span>
-        <button class="increment">Up</button>
-    </div>
-    <div class="timer">
-        <span id="timer-label">Pomodoro</span>
-        <h2 id="countdown"></h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Pomodoro Timer</title>
+        <link rel="stylesheet" href="assets/styles.css">
+    </head>
+    <body>
+        <h1>Pomodoro Timer</h1>
+        <!--Session controls-->
+        <div class="settings-container">
+            <div class="time-setting" id="session-setting">
+                <h4>Session Length</h4>
+                <button class="decrement">Down</button>
+                <span class="minute-setting" id="session-length"></span>
+                <button class="increment">Up</button>
+            </div>
+            <!--Break controls-->
+            <div class="time-setting" id="break-setting">
+                <h4>Break Length</h4>
+                <button class="decrement">Down</button>
+                <span class="minute-setting" id="break-length">5</span>
+                <button class="increment">Up</button>
+            </div>
+        </div>
+        <div class="timer">
+            <span id="timer-label">Pomodoro</span>
+            <h2 id="countdown"></h2>
+        </div>
         <div class="controls">
             <button id="start">Start</button>
             <button id="stop">Stop</button>
             <button id="reset">Reset</button>
         </div>
-    </div>
-    <script src="scripts/main.js"></script>
-</body>
+        <script src="scripts/main.js"></script>
+    </body>
 </html>
