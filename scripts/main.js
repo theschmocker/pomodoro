@@ -7,7 +7,6 @@ const resetButton = document.getElementById('reset');
 const sessionLengthElement = document.getElementById('session-length');
 const breakLengthElement = document.getElementById('break-length');
 
-
 // Application State
 
 function Timer() {
@@ -141,12 +140,6 @@ function settingsChange(e) {
             default:
                 break;
         }
-    }
-}
-
-function controlHandler(e) {
-    if (e.target.nodeName === 'BUTTON') {
-        AppTimer[e.target.id]();
     }
 }
 
