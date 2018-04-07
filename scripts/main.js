@@ -53,10 +53,10 @@ function Pomodoro(timer) {
     this.timer = timer;
     this.type = 'Pomodoro';
     this.isRunning = false;
-    //default display value
-    this.time = timer.sessionDuration;
     // used for timerLoop
-    this.currentTime = this.time * 60;
+    this.currentTime = timer.sessionDuration * 60;
+    //default display value
+    this.time = formatTime(this.currentTime);
 
     let timerLoop;
 
@@ -86,10 +86,10 @@ function Break(timer) {
     this.timer = timer;
     this.type = 'Break';
     this.isRunning = false;
-    //default display value
-    this.time = timer.breakDuration;
     // used for timerLoop
-    this.currentTime = this.time * 60;
+    this.currentTime = timer.breakDuration * 60;
+    //default display value
+    this.time = formatTime(this.currentTime);
 
     let timerLoop;
 
