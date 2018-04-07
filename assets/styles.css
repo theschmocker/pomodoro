@@ -4,6 +4,9 @@
     --color-primary: #1a237e;
     --color-secondary: #534bae;
     --color-bg: #000051;
+    --color-fg: #ccc;
+
+    --timer-state-size: 0.8rem;
 }
 
 * {
@@ -16,9 +19,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #ccc;
+    color: var(--color-fg);
     background: var(--color-bg);
-    text-shadow: 0 0 3px rgba(255,255,255,0.5);
 }
 
 h1 {
@@ -28,18 +30,85 @@ h1 {
 
 .timer {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 30vw;
     height: 30vw;
     margin: 1rem auto;
     background: rgba(255,255,255, 0.07);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border: 4px solid var(--color-secondary);
     border-radius: 50%;
+}
+
+#timer-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 0;
+    font-size: 3rem;
+}
+
+#timer-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
 }
 
 .settings-container {
     display: flex;
     justify-content: space-between;
+}
+
+.play {
+    display: block;
+    height: 0;
+    width: 0;
+    margin-left: calc(2 * 0.14 * var(--timer-state-size));
+    /*margin-left: 17px;*/
+    background: none;
+    border: none;
+    border-top: var(--timer-state-size) solid transparent;
+    border-bottom: var(--timer-state-size) solid transparent;
+    border-left: calc(var(--timer-state-size) * 2 * 0.86) solid var(--color-fg);
+
+}
+
+.pause {
+    display: block;
+    position: relative;
+    background: none;
+    border: none;
+    height: calc(var(--timer-state-size) * 2);
+    width: calc(var(--timer-state-size) * 2 * 0.86);
+}
+
+.pause:before, .pause:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 33%;
+    background: var(--color-fg);
+}
+
+.pause:before {
+    left: 0;
+}
+
+.pause:after {
+    right: 0;
+}
+
+.hidden {
+    display: none;
 }
