@@ -1,6 +1,8 @@
 // Get DOM nodes
 const timerSettings = Array.from(document.getElementsByClassName('time-setting'));
-const timerControls = document.querySelector('.controls');
+
+const timerStartStop = document.querySelector('.timer');
+const resetButton = document.getElementById('reset');
 
 const sessionLengthElement = document.getElementById('session-length');
 const breakLengthElement = document.getElementById('break-length');
@@ -229,4 +231,10 @@ timerSettings.forEach(el => {
     el.addEventListener('click', settingsChange);
 });
 
-timerControls.addEventListener('click', controlHandler);
+timerStartStop.addEventListener('click', function() {
+    const timerStateElements = Array.from(this.querySelector('#timer-state').children);
+    timerStateElements.forEach(el => el.classList.toggle('hidden'));
+    (AppTimer.isRunning()) ? AppTimer.stop() : AppTimer.start();
+});
+
+resetButton.addEventListener('click', () => AppTimer.reset());
