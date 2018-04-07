@@ -195,10 +195,10 @@ function updateSetting(observ, action) {
     console.log(action);
     switch (action) {
         case 'increment':
-            observ(observ() + 1);
+            if (observ() !== 60) observ(observ() + 1);
             break;
         case 'decrement':
-            observ(observ() - 1);
+            if (observ() !== 1) observ(observ() - 1);
             break;
         default:
             break;
