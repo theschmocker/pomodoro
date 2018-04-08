@@ -84,7 +84,6 @@ h1 {
 }
 
 .decrement {
-    margin-right: 0.5rem;
     border-top: var(--settings-button-size) solid var(--color-fg);
     border-left: var(--settings-button-size) solid transparent;
     border-right: var(--settings-button-size) solid transparent;
