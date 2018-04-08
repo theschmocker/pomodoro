@@ -220,12 +220,10 @@ h1 {
     html {
         font-size: 16px;
     }
+}
 
-    h1 {
-        font-size: 2.75rem;
-    }
-
-    .label {
-        font-size: 1.2rem;
+@media screen and (min-width: 768px) {
+    html {
+        font-size: 18px;
     }
 }
