@@ -197,7 +197,6 @@ function observable(value) {
 }
 
 function updateSetting(observ, action) {
-    console.log(action);
     switch (action) {
         case 'increment':
             if (observ() !== 60) observ(observ() + 1);
