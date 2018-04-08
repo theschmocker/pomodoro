@@ -1,9 +1,9 @@
 const alarm = new Audio('assets/alarm.mp3');
 // Get DOM nodes
 const timerSettings = Array.from(document.getElementsByClassName('time-setting'));
-
 const timerStartStop = document.querySelector('.timer');
 const resetButton = document.getElementById('reset');
+const timerToggleButton = document.getElementById('change-timer');
 
 const sessionLengthElement = document.getElementById('session-length');
 const breakLengthElement = document.getElementById('break-length');
@@ -13,7 +13,7 @@ const breakLengthElement = document.getElementById('break-length');
 function Timer() {
     this.sessionDuration;
     this.breakDuration;
-    let currentTimer = new Pomodoro(this);
+    this.currentTimer = new Pomodoro(this);
     this.setSessionDuration = (time) => {
         this.sessionDuration = time;
         this.reset();
@@ -23,10 +23,10 @@ function Timer() {
         this.breakDuration = time;
         this.reset();
     };
-    this.isRunning = () => currentTimer.isRunning;
+    this.isRunning = () => this.currentTimer.isRunning;
 
     this.changeTimer = (nextTimer, shouldStart=true) => {
-        currentTimer = nextTimer;
+        this.currentTimer = nextTimer;
         document.getElementById('timer-label').innerText = nextTimer.type;
         if (shouldStart) nextTimer.start();
         else this.updateDisplay();
@@ -34,21 +34,21 @@ function Timer() {
 
     this.updateDisplay = () => {
         const countdown = document.getElementById('countdown');
-        countdown.innerText = currentTimer.time;
+        countdown.innerText = this.currentTimer.time;
     };
 
     this.start = () => {
-        if (!this.isRunning()) currentTimer.start()
+        if (!this.isRunning()) this.currentTimer.start()
     }
 
     this.stop = () => {
-        if (currentTimer.currentTime === 0) alarm.play();
-        currentTimer.stop()
+        if (this.currentTimer.currentTime === 0) alarm.play();
+        this.currentTimer.stop()
     };
 
     this.reset = () => {
-        if (!currentTimer.isRunning) {
-            const newTimer = (currentTimer.type === 'Pomodoro') ? new Pomodoro(this) : new Break(this);
+        if (!this.currentTimer.isRunning) {
+            const newTimer = (this.currentTimer.type === 'Pomodoro') ? new Pomodoro(this) : new Break(this);
             this.changeTimer(newTimer, false);
         }
     }
@@ -148,6 +148,13 @@ function settingsChange(e) {
     }
 }
 
+function timerToggleHandler() {
+    if (!AppTimer.isRunning()) {
+        const nextTimer = (AppTimer.currentTimer.type === 'Pomodoro') ? new Break(AppTimer) : new Pomodoro(AppTimer);
+        AppTimer.changeTimer(nextTimer, false);
+    }
+}
+
 // Helper Methods
 function updateMinuteDisplay(el, action) {
     let minutes = Number(el.innerText);
@@ -235,3 +242,4 @@ timerStartStop.addEventListener('click', function() {
 });
 
 resetButton.addEventListener('click', () => AppTimer.reset());
+timerToggleButton.addEventListener('click', timerToggleHandler);
