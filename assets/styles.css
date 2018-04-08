@@ -12,6 +12,9 @@
 
 * {
     box-sizing: border-box;
+}
+
+html {
     font-size: 18px;
 }
 
@@ -46,11 +49,15 @@ h1 {
 }
 
 .time-setting--heading {
-    margin: 0;
     padding: 0px 5px;
     background: rgba(255, 255, 255, 0.1);
+}
+
+.label {
+    margin: 0;
     font-weight: 400;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .time-setting--controls {
@@ -87,8 +94,8 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30vw;
-    height: 30vw;
+    width: 20rem;
+    height: 20rem;
     margin: 1rem auto;
     --color-fg: #ddd;
     color: var(--color-fg);
@@ -108,10 +115,6 @@ h1 {
 
 #timer-label {
     padding: 3px 5px;
-    font-size: 0.9rem;
-    font-weight: 400;
-    text-align: center;
-    text-transform: uppercase;
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -121,7 +124,7 @@ h1 {
     align-items: center;
     flex: 1;
     margin: 0;
-    font-family: 'Roboto Mono';
+    font-family: 'Open Sans';
     font-weight: 300;
     font-size: 4rem;
     text-shadow: 0 5px 0 rgba(0, 0, 0, 0.1);
@@ -195,4 +198,18 @@ h1 {
 
 #reset:hover {
     background: rgba(255, 0, 50, 0.4);
+}
+
+@media screen and (max-width: 321px) {
+    html {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 2.75rem;
+    }
+
+    .label {
+        font-size: 1.2rem;
+    }
 }
