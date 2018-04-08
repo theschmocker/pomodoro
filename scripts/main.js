@@ -16,12 +16,12 @@ function Timer() {
     let currentTimer = new Pomodoro(this);
     this.setSessionDuration = (time) => {
         this.sessionDuration = time;
-        currentTimer = new Pomodoro(this);
-        this.updateDisplay();
+        this.reset();
     };
 
     this.setBreakDuration = (time) => {
         this.breakDuration = time;
+        this.reset();
     };
     this.isRunning = () => currentTimer.isRunning;
 
@@ -48,7 +48,8 @@ function Timer() {
 
     this.reset = () => {
         if (!currentTimer.isRunning) {
-            this.changeTimer(new Pomodoro(this), false);
+            const newTimer = (currentTimer.type === 'Pomodoro') ? new Pomodoro(this) : new Break(this);
+            this.changeTimer(newTimer, false);
         }
     }
 }
