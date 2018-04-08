@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Pomodoro Timer</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Orbitron" rel="stylesheet"> 
         <link rel="stylesheet" href="assets/styles.css">
     </head>
     <body>
@@ -10,21 +11,25 @@
         <!--Session controls-->
         <div class="settings-container">
             <div class="time-setting" id="session-setting">
-                <h4>Session Length</h4>
-                <button class="decrement">Down</button>
-                <span class="minute-setting" id="session-length"></span>
-                <button class="increment">Up</button>
+                <h4 class="time-setting--heading">Session Length</h4>
+                <p class="minute-setting" id="session-length"></p>
+                <div class="time-setting--controls">
+                    <button class="decrement"></button>
+                    <button class="increment"></button>
+                </div>
             </div>
             <!--Break controls-->
             <div class="time-setting" id="break-setting">
-                <h4>Break Length</h4>
-                <button class="decrement">Down</button>
-                <span class="minute-setting" id="break-length">5</span>
-                <button class="increment">Up</button>
+                <h4 class="time-setting--heading">Break Length</h4>
+                <p class="minute-setting" id="break-length">5</p>
+                <div class="time-setting--controls">
+                    <button class="decrement"></button>
+                    <button class="increment"></button>
+                </div>
             </div>
         </div>
         <div role="timer-start-stop" class="timer">
-            <span id="timer-label">Pomodoro</span>
+            <h4 class="timer-label-wrapper"><span id="timer-label">Pomodoro</span></h4>
             <h2 id="countdown"></h2>
             <div id="timer-state">
                 <span class="play"></span>
