@@ -181,3 +181,17 @@ h1 {
 .hidden {
     display: none;
 }
+
+#reset {
+    padding: 1rem;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 1rem;
+    border: none;
+    background: transparent;
+    border-radius: 2px;
+}
+
+#reset:hover {
+    background: rgba(255, 0, 50, 0.4);
+}
