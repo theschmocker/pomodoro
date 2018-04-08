@@ -123,12 +123,12 @@ function Break(timer) {
 
 function updateSessionLengthDisplay(minutes) {
     const display = document.getElementById('session-length');
-    display.innerText = minutes;
+    display.innerText = formatTwoDigit(minutes);
 }
 
 function updateBreakLengthDisplay(minutes) {
     const display = document.getElementById('break-length');
-    display.innerText = minutes;
+    display.innerText = formatTwoDigit(minutes);
 }
 
 
@@ -172,14 +172,14 @@ function updateMinuteDisplay(el, action) {
     el.innerText = minutes;
 }
 
-function formatTime(inSeconds) {
-    function twoDigit(time) {
-        if (String(time).length == 1) time = '0' + time;
-        return time;
-    }
+function formatTwoDigit(time) {
+    if (String(time).length == 1) time = '0' + time;
+    return time;
+}
 
-    const minutes = twoDigit(Math.floor(inSeconds / 60));
-    const seconds = twoDigit(inSeconds % 60);
+function formatTime(inSeconds) {
+    const minutes = formatTwoDigit(Math.floor(inSeconds / 60));
+    const seconds = formatTwoDigit(inSeconds % 60);
 
     return `${minutes}:${seconds}`;
 }
