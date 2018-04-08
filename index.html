@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1>Pomodoro Timer</h1>
-        <div role="timer-start-stop" class="timer">
+        <div role="timer-start-stop" class="timer no-select"">
             <h4 class="timer-label-wrapper"><span id="timer-label" class="label">Pomodoro</span></h4>
             <h2 id="countdown"></h2>
             <div id="timer-state">
@@ -20,7 +20,7 @@
         </div>
         <!--Session controls-->
         <div class="settings-container">
-            <div class="time-setting" id="session-setting">
+            <div class="time-setting no-select" id="session-setting">
                 <h4 class="time-setting--heading label">Session Length</h4>
                 <div class="time-setting--controls">
                     <button class="decrement"></button>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <!--Break controls-->
-            <div class="time-setting" id="break-setting">
+            <div class="time-setting no-select" id="break-setting">
                 <h4 class="time-setting--heading label">Break Length</h4>
                 <div class="time-setting--controls">
                     <button class="decrement"></button>
