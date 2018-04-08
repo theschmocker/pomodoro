@@ -5,37 +5,36 @@
         <title>Pomodoro Timer</title>
         <link href="https://fonts.googleapis.com/css?family=Orbitron&text=PomdrTie" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300&text=0123456789:" rel="stylesheet"> 
         <link rel="stylesheet" href="assets/styles.css">
     </head>
     <body>
         <h1>Pomodoro Timer</h1>
+        <div role="timer-start-stop" class="timer">
+            <h4 class="timer-label-wrapper"><span id="timer-label" class="label">Pomodoro</span></h4>
+            <h2 id="countdown"></h2>
+            <div id="timer-state">
+                <span class="play"></span>
+                <span class="pause hidden"></span>
+            </div>
+        </div>
         <!--Session controls-->
         <div class="settings-container">
             <div class="time-setting" id="session-setting">
-                <h4 class="time-setting--heading">Session Length</h4>
-                <p class="minute-setting" id="session-length"></p>
+                <h4 class="time-setting--heading label">Session Length</h4>
                 <div class="time-setting--controls">
                     <button class="decrement"></button>
+                    <p class="minute-setting" id="session-length"></p>
                     <button class="increment"></button>
                 </div>
             </div>
             <!--Break controls-->
             <div class="time-setting" id="break-setting">
-                <h4 class="time-setting--heading">Break Length</h4>
-                <p class="minute-setting" id="break-length">5</p>
+                <h4 class="time-setting--heading label">Break Length</h4>
                 <div class="time-setting--controls">
                     <button class="decrement"></button>
+                    <p class="minute-setting" id="break-length">5</p>
                     <button class="increment"></button>
                 </div>
-            </div>
-        </div>
-        <div role="timer-start-stop" class="timer">
-            <h4 class="timer-label-wrapper"><span id="timer-label">Pomodoro</span></h4>
-            <h2 id="countdown"></h2>
-            <div id="timer-state">
-                <span class="play"></span>
-                <span class="pause hidden"></span>
             </div>
         </div>
         <button id="reset">Reset</button>
