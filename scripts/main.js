@@ -1,3 +1,4 @@
+const alarm = new Audio('assets/alarm.mp3');
 // Get DOM nodes
 const timerSettings = Array.from(document.getElementsByClassName('time-setting'));
 
@@ -40,7 +41,10 @@ function Timer() {
         if (!this.isRunning()) currentTimer.start()
     }
 
-    this.stop = () => currentTimer.stop();
+    this.stop = () => {
+        if (currentTimer.currentTime === 0) alarm.play();
+        currentTimer.stop()
+    };
 
     this.reset = () => {
         if (!currentTimer.isRunning) {
@@ -66,7 +70,7 @@ function Pomodoro(timer) {
         this.isRunning = true;
         timerLoop = setInterval(() => {
             if (this.currentTime === 0) {
-                this.stop();
+                timer.stop();
                 return;
             }
             this.currentTime--;
@@ -99,7 +103,7 @@ function Break(timer) {
         this.isRunning = true;
         timerLoop = setInterval(() => {
             if (this.currentTime === 0) {
-                this.stop();
+                timer.stop();
                 return;
             }
             this.currentTime--;
