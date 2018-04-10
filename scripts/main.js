@@ -120,6 +120,26 @@ function Break(timer) {
     };
 }
 
+const SettingsStore = (function() {
+    // Set defaults
+    if (!localStorage.getItem('sessionLength')) localStorage.setItem('sessionLength', '25');
+    if (!localStorage.getItem('breakLength')) localStorage.setItem('breakLength', '5');
+
+    return {
+        session: function (newDuration) {
+            if (arguments.length) {
+                localStorage.setItem('sessionLength', newDuration);
+            }
+            return Number(localStorage.getItem('sessionLength'));
+        },
+        break: function (newDuration) {
+            if (arguments.length) {
+                localStorage.setItem('breakLength', newDuration);
+            }
+            return Number(localStorage.getItem('breakLength'));
+        },
+    }
+})();
 
 function updateSessionLengthDisplay(minutes) {
     const display = document.getElementById('session-length');
@@ -223,12 +243,15 @@ const breakLength = observable();
 sessionLength.subscribe(updateSessionLengthDisplay);
 breakLength.subscribe(updateBreakLengthDisplay);
 
+sessionLength.subscribe(SettingsStore.session);
+breakLength.subscribe(SettingsStore.break);
+
 const AppTimer = new Timer();
 
 sessionLength.subscribe(AppTimer.setSessionDuration);
-sessionLength(25);
+sessionLength(SettingsStore.session());
 breakLength.subscribe(AppTimer.setBreakDuration);
-breakLength(5);
+breakLength(SettingsStore.break());
 
 // add event listeners
 timerSettings.forEach(el => {
