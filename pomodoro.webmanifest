@@ -1,0 +1,8 @@
+{
+  "name": "Pomodoro Timer",
+  "short_name": "Pomodoro",
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "background_color": "#001a35",
+  "description": "A simple pomodoro timer"
+}
