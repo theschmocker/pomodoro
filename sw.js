@@ -1,10 +1,12 @@
 const cacheName = "pomodorschmo-v0.1";
 let appShellFiles = [
+    '/',
     '/index.html',
     '/registerServiceWorker.js',
     '/assets/styles.css',
     '/scripts/main.js',
     '/assets/alarm.mp3',
+    '/favicon-256.png',
 ];
 
 self.addEventListener('install', function(e) {
@@ -15,6 +17,10 @@ self.addEventListener('install', function(e) {
             return cache.addAll(appShellFiles);
         })
     );
+});
+
+self.addEventListener('activate',  event => {
+  event.waitUntil(self.clients.claim());
 });
 
 // Fetching content using Service Worker

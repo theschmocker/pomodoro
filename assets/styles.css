@@ -25,11 +25,11 @@ body {
     align-items: center;
     background: var(--color-bg);
     color: var(--color-fg);
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
-    font-family: 'Orbitron';
+    font-family: 'Orbitron', sans-serif;
     font-size: 2.5rem;
     text-align: center;
 }
@@ -125,7 +125,7 @@ h1 {
     align-items: center;
     flex: 1;
     margin: 0;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', monospace;
     font-weight: 300;
     font-size: 4rem;
     text-shadow: 0 5px 0 rgba(0, 0, 0, 0.1);
