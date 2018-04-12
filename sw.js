@@ -6,7 +6,6 @@ let appShellFiles = [
     '/assets/styles.css',
     '/scripts/main.js',
     '/assets/alarm.mp3',
-    '/favicon-256.png',
 ];
 
 self.addEventListener('install', function(e) {
