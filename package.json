@@ -1,0 +1,26 @@
+{
+    "name": "pomodoro",
+    "version": "1.0.0",
+    "description": "A simple pomodoro timer",
+    "main": ".",
+    "scripts": {
+        "start": "webpack-dev-server --mode development --open",
+        "dev": "webpack --mode development",
+        "build": "webpack --mode production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/theschmocker/pomodoro.git"
+    },
+    "author": "Jacob Schmocker",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/theschmocker/pomodoro/issues"
+    },
+    "homepage": "https://github.com/theschmocker/pomodoro#readme",
+    "devDependencies": {
+        "webpack": "^4.5.0",
+        "webpack-cli": "^2.0.14",
+        "webpack-dev-server": "^3.1.3"
+    }
+}
