@@ -8,7 +8,7 @@ console.log(assets);
 
 let appShellFiles = [...assets, './', './static/alarm.mp3', './static/styles.css']
 
-const cacheName = "pomodorschmo-v0.1";
+const cacheName = `pomodorschmo1-${new Date().toISOString()}`;
     
     //    [
     //    '/',
