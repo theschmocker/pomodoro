@@ -1,4 +1,5 @@
 import registerSW from './registerServiceWorker.js';
+import './styles.css';
 
 const alarm = new Audio('static/alarm.mp3');
 // Get DOM nodes
