@@ -1,4 +1,6 @@
-const alarm = new Audio('assets/alarm.mp3');
+import registerSW from './registerServiceWorker.js';
+
+const alarm = new Audio('static/alarm.mp3');
 // Get DOM nodes
 const timerSettings = Array.from(document.getElementsByClassName('time-setting'));
 const timerStartStop = document.querySelector('.timer');
@@ -266,3 +268,5 @@ timerStartStop.addEventListener('click', function() {
 
 resetButton.addEventListener('click', () => AppTimer.reset());
 timerToggleButton.addEventListener('click', timerToggleHandler);
+
+registerSW();
