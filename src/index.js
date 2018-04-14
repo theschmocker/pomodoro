@@ -2,6 +2,7 @@ import registerSW from './registerServiceWorker.js';
 import SettingsStore from './SettingsStore.js';
 import observable from './observable.js';
 import { formatTime, formatTwoDigit } from './timeFormat.js';
+import Timer from './Timer.js';
 
 import './styles.css';
 
@@ -14,119 +15,6 @@ const timerToggleButton = document.getElementById('change-timer');
 
 const sessionLengthElement = document.getElementById('session-length');
 const breakLengthElement = document.getElementById('break-length');
-
-// Application State
-
-function Timer() {
-    this.sessionDuration;
-    this.breakDuration;
-    this.currentTimer = new Pomodoro(this);
-    this.setSessionDuration = (time) => {
-        this.sessionDuration = time;
-        this.reset();
-    };
-
-    this.setBreakDuration = (time) => {
-        this.breakDuration = time;
-        this.reset();
-    };
-    this.isRunning = () => this.currentTimer.isRunning;
-
-    this.changeTimer = (nextTimer, shouldStart=true) => {
-        this.currentTimer = nextTimer;
-        document.getElementById('timer-label').innerText = nextTimer.type;
-        if (shouldStart) nextTimer.start();
-        else this.updateDisplay();
-    };
-
-    this.updateDisplay = () => {
-        const countdown = document.getElementById('countdown');
-        countdown.innerText = this.currentTimer.time;
-    };
-
-    this.start = () => {
-        if (!this.isRunning()) this.currentTimer.start()
-    }
-
-    this.stop = () => {
-        if (this.currentTimer.currentTime === 0) alarm.play();
-        this.currentTimer.stop()
-    };
-
-    this.reset = () => {
-        if (!this.currentTimer.isRunning) {
-            const newTimer = (this.currentTimer.type === 'Pomodoro') ? new Pomodoro(this) : new Break(this);
-            this.changeTimer(newTimer, false);
-        }
-    }
-}
-
-function Pomodoro(timer) {
-    this.timer = timer;
-    this.type = 'Pomodoro';
-    this.isRunning = false;
-    // used for timerLoop
-    this.currentTime = timer.sessionDuration * 60;
-    //default display value
-    this.time = formatTime(this.currentTime);
-
-    let timerLoop;
-
-    let duration;
-    
-    this.start = () => {
-        this.isRunning = true;
-        timerLoop = setInterval(() => {
-            if (this.currentTime === 0) {
-                timer.stop();
-                return;
-            }
-            this.currentTime--;
-            this.time = formatTime(this.currentTime);
-            this.timer.updateDisplay();
-
-        }, 1000);
-    };
-    this.stop = () => {
-        this.isRunning = false;
-        clearInterval(timerLoop);
-        if (this.currentTime === 0) timer.changeTimer(new Break(timer));
-    };
-}
-
-function Break(timer) {
-    this.timer = timer;
-    this.type = 'Break';
-    this.isRunning = false;
-    // used for timerLoop
-    this.currentTime = timer.breakDuration * 60;
-    //default display value
-    this.time = formatTime(this.currentTime);
-
-    let timerLoop;
-
-    let duration;
-    
-    this.start = () => {
-        this.isRunning = true;
-        timerLoop = setInterval(() => {
-            if (this.currentTime === 0) {
-                timer.stop();
-                return;
-            }
-            this.currentTime--;
-            this.time = formatTime(this.currentTime);
-            this.timer.updateDisplay();
-
-        }, 1000);
-    };
-    this.stop = () => {
-        this.isRunning = false;
-        clearInterval(timerLoop);
-        if (this.currentTime === 0) timer.changeTimer(new Pomodoro(timer));
-    };
-}
-
 
 function updateSessionLengthDisplay(minutes) {
     const display = document.getElementById('session-length');
@@ -156,10 +44,7 @@ function settingsChange(e) {
 }
 
 function timerToggleHandler() {
-    if (!AppTimer.isRunning()) {
-        const nextTimer = (AppTimer.currentTimer.type === 'Pomodoro') ? new Break(AppTimer) : new Pomodoro(AppTimer);
-        AppTimer.changeTimer(nextTimer, false);
-    }
+    AppTimer.toggleTimer();
 }
 
 // Helper Methods
