@@ -18,12 +18,12 @@ const breakLengthElement = document.getElementById('break-length');
 
 function updateSessionLengthDisplay(minutes) {
     const display = document.getElementById('session-length');
-    display.innerText = formatTwoDigit(minutes);
+    display.textContent = formatTwoDigit(minutes);
 }
 
 function updateBreakLengthDisplay(minutes) {
     const display = document.getElementById('break-length');
-    display.innerText = formatTwoDigit(minutes);
+    display.textContent = formatTwoDigit(minutes);
 }
 
 
@@ -49,7 +49,7 @@ function timerToggleHandler() {
 
 // Helper Methods
 function updateMinuteDisplay(el, action) {
-    let minutes = Number(el.innerText);
+    let minutes = Number(el.textContent);
     switch (action) {
         case 'increment':
             if (minutes !== 60) minutes++;
@@ -61,7 +61,7 @@ function updateMinuteDisplay(el, action) {
             break;
     }
 
-    el.innerText = minutes;
+    el.textContent = minutes;
 }
 
 function updateSetting(observ, action) {

@@ -27,7 +27,7 @@ function Timer(
 
     this.changeTimer = (nextTimer, shouldStart=true) => {
         this.currentTimer = nextTimer;
-        labelElement.innerText = nextTimer.type;
+        labelElement.textContent = nextTimer.type;
         if (shouldStart) nextTimer.start();
         else this.updateDisplay();
     };
@@ -35,7 +35,7 @@ function Timer(
 
 
     this.updateDisplay = () => {
-        countdownElement.innerText = this.currentTimer.time;
+        countdownElement.textContent = this.currentTimer.time;
     };
 
     this.start = () => {
