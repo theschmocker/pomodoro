@@ -1,4 +1,8 @@
 import registerSW from './registerServiceWorker.js';
+import SettingsStore from './SettingsStore.js';
+import observable from './observable.js';
+import { formatTime, formatTwoDigit } from './timeFormat.js';
+
 import './styles.css';
 
 const alarm = new Audio('static/alarm.mp3');
@@ -123,26 +127,6 @@ function Break(timer) {
     };
 }
 
-const SettingsStore = (function() {
-    // Set defaults
-    if (!localStorage.getItem('sessionLength')) localStorage.setItem('sessionLength', '25');
-    if (!localStorage.getItem('breakLength')) localStorage.setItem('breakLength', '5');
-
-    return {
-        session: function (newDuration) {
-            if (arguments.length) {
-                localStorage.setItem('sessionLength', newDuration);
-            }
-            return Number(localStorage.getItem('sessionLength'));
-        },
-        break: function (newDuration) {
-            if (arguments.length) {
-                localStorage.setItem('breakLength', newDuration);
-            }
-            return Number(localStorage.getItem('breakLength'));
-        },
-    }
-})();
 
 function updateSessionLengthDisplay(minutes) {
     const display = document.getElementById('session-length');
@@ -193,37 +177,6 @@ function updateMinuteDisplay(el, action) {
     }
 
     el.innerText = minutes;
-}
-
-function formatTwoDigit(time) {
-    if (String(time).length == 1) time = '0' + time;
-    return time;
-}
-
-function formatTime(inSeconds) {
-    const minutes = formatTwoDigit(Math.floor(inSeconds / 60));
-    const seconds = formatTwoDigit(inSeconds % 60);
-
-    return `${minutes}:${seconds}`;
-}
-
-function observable(value) {
-    let listeners = [];
-
-    function notify(newValue) {
-        listeners.forEach(listener => listener(newValue));
-    }
-
-    function accessor(newValue) {
-        if (arguments.length && newValue !== value) {
-            value = newValue;
-            notify(newValue);
-        }
-        return value;
-    }
-    accessor.subscribe = listener => listeners.push(listener);
-
-    return accessor;
 }
 
 function updateSetting(observ, action) {
