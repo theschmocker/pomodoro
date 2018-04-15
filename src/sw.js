@@ -9,15 +9,6 @@ console.log(assets);
 let appShellFiles = [...assets, './', './static/alarm.mp3', './static/styles.css']
 
 const cacheName = `pomodorschmo1-${new Date().toISOString()}`;
-    
-    //    [
-    //    '/',
-    //    '/index.html',
-    //    '/registerServiceWorker.js',
-    //    '/assets/styles.css',
-    //    '/scripts/main.js',
-    //    '/assets/alarm.mp3',
-    //];
 
 self.addEventListener('install', function(e) {
     console.log('[Service Work] Install');
