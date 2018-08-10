@@ -36,6 +36,7 @@ function Timer(
 
     this.updateDisplay = () => {
         countdownElement.textContent = this.currentTimer.time;
+        document.title = `${this.currentTimer.time} - Pomtime`
     };
 
     this.start = () => {
